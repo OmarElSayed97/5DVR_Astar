@@ -10,14 +10,14 @@ namespace AStar5DVR
     {
         #region Variables
         List<List<Node>> Grid;
-        int GridRows
+        public int GridRows
         {
             get
             {
                 return Grid[0].Count;
             }
         }
-        int GridCols
+        public int GridCols
         {
             get
             {
@@ -48,6 +48,8 @@ namespace AStar5DVR
                     grid[i].Insert(j,node);
                 }
             }
+
+            Grid = grid;
         }
         #endregion
 
@@ -55,7 +57,7 @@ namespace AStar5DVR
         static bool GenerateObstacle()
         {
             System.Random random = new System.Random();
-            if (random.NextDouble() < 0.8)
+            if (random.NextDouble() < 0.2)
                 return false;
             else
             {
