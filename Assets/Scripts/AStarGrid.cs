@@ -63,6 +63,33 @@ namespace AStar5DVR
             }
             
         }
+
+        public List<Node> GetAdjacentNodes(Node n)
+        {
+            List<Node> adjNodes = new List<Node>();
+
+            int row = (int)n.Position.y;
+            int col = (int)n.Position.x;
+
+            if (row + 1 < GridRows)
+            {
+                adjNodes.Add(Grid[col][row + 1]);
+            }
+            if (row - 1 >= 0)
+            {
+                adjNodes.Add(Grid[col][row - 1]);
+            }
+            if (col - 1 >= 0)
+            {
+                adjNodes.Add(Grid[col - 1][row]);
+            }
+            if (col + 1 < GridCols)
+            {
+                adjNodes.Add(Grid[col + 1][row]);
+            }
+
+            return adjNodes;
+        }
         #endregion
 
     }

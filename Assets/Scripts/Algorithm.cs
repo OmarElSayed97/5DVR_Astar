@@ -1,18 +1,12 @@
-﻿using System.Collections;
+﻿using AStar5DVR;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Algorithm : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Stack SolveGrid(AStarGrid grid)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return null;
     }
 }
