@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 namespace AStar5DVR
@@ -26,7 +24,7 @@ namespace AStar5DVR
         #endregion
 
         #region Constructor
-        public Node(Vector2 pos, bool walkable, float weight = 1)
+        public Node(Vector2 pos, bool walkable)
         {
             Parent = null;
             Position = pos;
