@@ -1,5 +1,4 @@
 ﻿using AStar5DVR;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +6,22 @@ using UnityEngine;
 
 public class Algorithm : MonoBehaviour
 {
-
+    #region Variables
+    public static Algorithm _instance;
+    private AStarGrid aStarGrid;
+    #endregion
+    #region MainMethods
+    private void Awake()
+    {
+        _instance = this;
+    }
     private void Start()
     {
-        AStarGrid grid = new AStarGrid(4);
-        Debug.Log(grid.GridCols);
-        Stack<Node> path = SolveGrid(new Vector2(0, 0), new Vector2(3, 3), grid);
-        PrintPath(path);
+        aStarGrid = new AStarGrid(4);
+        PrintPath(SolveGrid(new Vector2(0, 0), new Vector2(3, 3), aStarGrid));
     }
+    #endregion
+    #region Methods
     public Stack<Node> SolveGrid(Vector2 startPoint, Vector2 endPoint, AStarGrid grid)
     {
         Node start = new Node(new Vector2(startPoint.x, startPoint.x), true);
@@ -39,11 +46,11 @@ public class Algorithm : MonoBehaviour
             {
                 if (!ExploredNodes.Contains(n) && n.Walkable)
                 {
-                    if (!ExploredNodes.Contains(n))
+                    if (!UnvisitedNodes.Contains(n))
                     {
                         n.Parent = current;
                         n.H = Vector2.Distance(n.Position, endPoint);
-                        n.G = Vector2.Distance(n.Position,startPoint);
+                        n.G = Vector2.Distance(n.Position, startPoint);
                         UnvisitedNodes.Add(n);
                         UnvisitedNodes = UnvisitedNodes.OrderBy(node => node.F).ToList<Node>();
                     }
@@ -63,15 +70,19 @@ public class Algorithm : MonoBehaviour
             temp = temp.Parent;
         } while (temp != start && temp != null);
         return Path;
-        
+
     }
 
 
     void PrintPath(Stack<Node> path)
     {
-       while(path.Count != 0)
+        while (path.Count != 0)
+
             Debug.Log(path.Pop().Position);
     }
-   
-    
+    #endregion
+
+
+
+
 }

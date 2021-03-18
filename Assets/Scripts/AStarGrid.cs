@@ -9,7 +9,7 @@ namespace AStar5DVR
     public class AStarGrid
     {
         #region Variables
-        List<List<Node>> Grid;
+        public List<List<Node>> Grid;
         public int GridRows
         {
             get
@@ -24,7 +24,7 @@ namespace AStar5DVR
                 return Grid.Count;
             }
         }
-
+        private System.Random randomProbality;
         #endregion
 
         #region Constructor
@@ -36,13 +36,14 @@ namespace AStar5DVR
         public AStarGrid(int gridSize)
         {
             List<List<Node>> grid = new List<List<Node>>();
+            randomProbality = new System.Random();
             for (int i = 0; i < gridSize; i++)
             {
                 List<Node> row = new List<Node>();
                 grid.Add(row);
                 for (int j = 0; j < gridSize; j++)
                 {
-                    bool walkable = GenerateObstacle();
+                    bool walkable = GenerateObstacle(randomProbality);
                     Vector2 position = new Vector2(i, j);
                     Node node = new Node(position,walkable);
                     grid[i].Insert(j,node);
@@ -54,9 +55,8 @@ namespace AStar5DVR
         #endregion
 
         #region Methods
-        static bool GenerateObstacle()
+        static bool GenerateObstacle(System.Random random)
         {
-            System.Random random = new System.Random();
             if (random.NextDouble() < 0.2)
                 return false;
             else
